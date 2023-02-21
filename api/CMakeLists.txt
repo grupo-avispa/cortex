@@ -11,6 +11,8 @@ SET(CMAKE_AUTOUIC ON)
 find_package(Qt5 COMPONENTS Core REQUIRED)
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 find_package(cppitertools)
+find_package(fastrtps REQUIRED)
+find_package(fastcdr REQUIRED)
 
 if(DEFINED GEOMETRY_API)
     find_package(Qt5 REQUIRED COMPONENTS Widgets Core Gui 3DCore 3DRender 3DExtras 3DInput 3DAnimation)

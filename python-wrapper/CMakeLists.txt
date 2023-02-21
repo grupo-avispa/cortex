@@ -9,6 +9,8 @@ find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 find_package(PythonLibs REQUIRED)
 find_package(Python3)
 find_package(pybind11 CONFIG REQUIRED)
+find_package(fastrtps REQUIRED)
+include_directories(${fastrtps_INCLUDE_DIR})
 
 add_library(pydsr MODULE)
 

@@ -7,6 +7,8 @@ project( dsr_core
 
 find_package(Qt5 COMPONENTS Core REQUIRED)
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
+find_package(fastrtps REQUIRED)
+find_package(fastcdr REQUIRED)
 
 add_library(dsr_core SHARED)
 add_library(Robocomp::dsr_core ALIAS dsr_core)

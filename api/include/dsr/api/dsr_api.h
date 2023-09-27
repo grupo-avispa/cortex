@@ -40,7 +40,7 @@
 #include "dsr/core/types/type_checking/dsr_edge_type.h"
 #include "dsr/core/utils.h"
 #include "dsr/core/id_generator.h"
-#include <threadpool/threadpool.h>
+#include "../../threadpool/include/threadpool.h"
 
 
 #define TIMEOUT 5000

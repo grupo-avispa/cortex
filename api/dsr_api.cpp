@@ -28,7 +28,7 @@ DSRGraph::DSRGraph(std::string name, uint32_t id, const std::string &dsr_input_f
         : agent_id(id),
         agent_name(std::move(name)),
         copy(false),
-        tp(5),
+        tp(1),
         tp_delta_attr(1),
         same_host(all_same_host),
         generator(id)
@@ -1534,6 +1534,7 @@ void DSRGraph::node_subscription_thread(bool showReceived)
                                         << m_info.sample_identity.writer_guid().entityId.value;
                             }
                             tp.spawn_task(&DSRGraph::join_delta_node, this, std::move(sample));
+                            //join_delta_node(std::move(sample));
                         }
                     }
                 } else {
@@ -1567,6 +1568,7 @@ void DSRGraph::edge_subscription_thread(bool showReceived)
                                         << m_info.sample_identity.writer_guid().entityId.value;
                             }
                             tp.spawn_task(&DSRGraph::join_delta_edge, this, std::move(sample));
+                            //join_delta_edge(std::move(sample));
                         }
                     }
                 } else {

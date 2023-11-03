@@ -172,9 +172,9 @@ void DSRPublisher::PubListener::on_publication_matched(eprosima::fastdds::dds::D
 {
     if (info.current_count == eprosima::fastrtps::rtps::MATCHED_MATCHING) {
         n_matched++;
-        qInfo() << "Subscriber [" << writer->get_topic()->get_name().data() <<"] matched " << info.last_subscription_handle.value;// << " self: " << info.remoteEndpointGuid.is_on_same_process_as(pub->getGuid());
+        qDebug() << "Subscriber [" << writer->get_topic()->get_name().data() <<"] matched " << info.last_subscription_handle.value;// << " self: " << info.remoteEndpointGuid.is_on_same_process_as(pub->getGuid());
     } else {
         n_matched--;
-        qInfo() << "Subscriber [" << writer->get_topic()->get_name().data() <<"] unmatched" << info.last_subscription_handle.value;// << " self: " <<info.remoteEndpointGuid.is_on_same_process_as(pub->getGuid());
+        qDebug() << "Subscriber [" << writer->get_topic()->get_name().data() <<"] unmatched" << info.last_subscription_handle.value;// << " self: " <<info.remoteEndpointGuid.is_on_same_process_as(pub->getGuid());
     }
 }

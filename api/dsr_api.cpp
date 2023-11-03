@@ -45,7 +45,7 @@ DSRGraph::DSRGraph(std::string name, uint32_t id, const std::string &dsr_input_f
                                                                     if (info.status == eprosima::fastrtps::rtps::ParticipantDiscoveryInfo::DISCOVERED_PARTICIPANT)
                                                                     {
                                                                         std::unique_lock<std::mutex> lck(participant_set_mutex);
-                                                                        std::cout << "Participant matched [" <<info.info.m_participantName.to_string() << "]" << std::endl;
+                                                                        qDebug() << "Participant matched [" <<info.info.m_participantName.to_string() << "]";
                                                                         graph->participant_set.insert({info.info.m_participantName.to_string(), false});
                                                                     }
                                                                     else if (info.status == eprosima::fastrtps::rtps::ParticipantDiscoveryInfo::REMOVED_PARTICIPANT ||
@@ -53,7 +53,7 @@ DSRGraph::DSRGraph(std::string name, uint32_t id, const std::string &dsr_input_f
                                                                     {
                                                                         std::unique_lock<std::mutex> lck(participant_set_mutex);
                                                                         graph->participant_set.erase(info.info.m_participantName.to_string());
-                                                                        std::cout << "Participant unmatched [" <<info.info.m_participantName.to_string() << "]" << std::endl;
+                                                                        qDebug() << "Participant unmatched [" <<info.info.m_participantName.to_string() << "]";
                                                                         graph->delete_node(info.info.m_participantName.to_string());
                                                                     }
                                                                 }));

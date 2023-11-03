@@ -72,6 +72,11 @@ set_target_properties(dsr_core PROPERTIES
 target_compile_options(dsr_core PUBLIC -O3 -fmax-errors=5 -std=c++20 -fno-char8_t
 	)
 
+target_compile_definitions(${PROJECT_NAME} PUBLIC
+        QT_NO_DEBUG_OUTPUT
+        #QT_NO_INFO_OUTPUT
+        QT_NO_WARNING_OUTPUT
+)
 # 'make install' to the correct locations (provided by GNUInstallDirs).
 install(TARGETS dsr_core EXPORT dsr_coreConfig
         ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}

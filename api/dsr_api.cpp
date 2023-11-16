@@ -175,7 +175,7 @@ std::optional<uint64_t> DSRGraph::insert_node(No &&node)
         std::shared_lock<std::shared_mutex> lck_cache(_mutex_cache_maps);
         uint64_t new_node_id = generator.generate();
         node.id(new_node_id);
-        if (node.name().empty() or name_map.contains(node.name()))
+        if (node.name().empty())
             node.name(node.type() + "_" + id_generator::hex_string(new_node_id));
         lck_cache.unlock();
         std::tie(inserted, delta) = insert_node_(user_node_to_crdt(std::forward<No>(node)));

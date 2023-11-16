@@ -263,11 +263,13 @@ requires (std::is_same_v<std::remove_cvref_t<No>, DSR::Node>)
             throw std::runtime_error(
                     (std::string("Cannot update node in G, " + std::to_string(node.id()) + " is deleted") + __FILE__ +
                      " " + __FUNCTION__ + " " + std::to_string(__LINE__)).data());
-        else if (( id_map.contains(node.id()) and id_map.at(node.id()) != node.name()) or
-                 ( name_map.contains(node.name()) and name_map.at(node.name()) != node.id()))
+        else if (( id_map.contains(node.id()) and id_map.at(node.id()) != node.name()) ) // or
+                // ( name_map.contains(node.name()) and name_map.at(node.name()) != node.id()))
             throw std::runtime_error(
-                    (std::string("Cannot update node in G, id and name must be unique") + __FILE__ + " " +
-                     __FUNCTION__ + " " + std::to_string(__LINE__)).data());
+//                    (std::string("Cannot update node in G, id and name must be unique") + __FILE__ + " " +
+//                     __FUNCTION__ + " " + std::to_string(__LINE__)).data());
+		    (std::string("Cannot update node in G, id must be unique") + __FILE__ + " " +
+                     __FUNCTION__ + " " + std::to_string(__LINE__)).data());                     
         else if (nodes.contains(node.id())) {
             lck_cache.unlock();
             std::tie(updated, vec_node_attr) = update_node_(user_node_to_crdt(std::forward<No>(node)));

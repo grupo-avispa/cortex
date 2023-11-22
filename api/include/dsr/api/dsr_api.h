@@ -700,6 +700,13 @@ namespace DSR
         void del_edge_signal(uint64_t from, uint64_t to, const std::string &edge_tag, DSR::SignalInfo info = {});
         void del_node_signal(uint64_t id, DSR::SignalInfo info = {}) ;
 
+        // New signals with Node and Edge objects
+        void update_node_signal_by_node(const Node &node, DSR::SignalInfo info = {});
+        void update_node_attr_signal_by_node(const Node &node, const std::vector<std::string>& att_names, DSR::SignalInfo info = {});
+        void update_edge_signal_by_edge(const Edge &edge, DSR::SignalInfo info = {});
+        void update_edge_attr_signal_by_edge(const Edge &edge, const std::vector<std::string>& att_name, DSR::SignalInfo info = {});
+        void del_edge_signal_by_edge(const Edge &edge, DSR::SignalInfo info = {});
+        void del_node_signal_by_node(const Node &node, DSR::SignalInfo info = {}) ;
     };
 } // namespace CRDT
 

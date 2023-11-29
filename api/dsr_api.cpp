@@ -1014,6 +1014,8 @@ void DSRGraph::join_delta_node(IDL::MvregNode &&mvreg)
         auto id = mvreg.id();
         uint64_t timestamp = mvreg.timestamp();
 
+        auto deleted_node = get_node(id); // if the node is going to be deleted, save the node itself before to emit it in the signal later
+
         auto crdt_delta = IDLNode_to_CRDT(std::move(mvreg));
         bool d_empty = crdt_delta.empty();
 
@@ -1163,9 +1165,8 @@ void DSRGraph::join_delta_node(IDL::MvregNode &&mvreg)
                 }
             } else {
                 emit del_node_signal(id, SignalInfo{ mvreg.agent_id() });
-                auto JP_node = get_node(id);
-                if (JP_node.has_value()) {
-                    emit del_node_signal_by_node(JP_node.value(), SignalInfo{ mvreg.agent_id() });
+                if (deleted_node.has_value()) {
+                    emit del_node_signal_by_node(deleted_node.value(), SignalInfo{ mvreg.agent_id() });
                 } else {
                     std::cout << "[JOIN NODE] WARNING!!! del_node_signal_by_node not emitted to delete node: "<< id << std::endl;                    
                 }

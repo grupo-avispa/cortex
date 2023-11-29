@@ -1860,8 +1860,8 @@ void DSRGraph::node_attrs_subscription_thread(bool showReceived)
                                 emit update_node_signal(id, type, SignalInfo{samples.vec().at(0).agent_id()});
                                 auto node = get_node(id);
                                 if (node.has_value()) {
-                                    emit update_node_attr_signal_by_node(get_node(id).value(), sig, SignalInfo{samples.vec().at(0).agent_id()});
-                                    emit update_node_signal_by_node(get_node(id).value(), SignalInfo{samples.vec().at(0).agent_id()});
+                                    emit update_node_attr_signal_by_node(node.value(), sig, SignalInfo{samples.vec().at(0).agent_id()});
+                                    emit update_node_signal_by_node(node.value(), SignalInfo{samples.vec().at(0).agent_id()});
                                 } else {
                                     std::cout << "[NODE ATTRS SUBSCRIPTION THREAD] Failed sending _by_node signals" << std::endl;
                                 }

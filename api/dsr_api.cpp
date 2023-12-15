@@ -367,14 +367,17 @@ bool DSRGraph::delete_node(const std::string &name)
     {
         std::unique_lock<std::shared_mutex> lock(_mutex);
         id = get_id_from_name(name);
+    }
+    if (id.has_value()) {
+            node = get_node(id.value());
+    }
+    {
+        std::unique_lock<std::shared_mutex> lock(_mutex);
         if (id.has_value()) {
             std::tie(result, deleted_edges, deleted_node, delta_vec) = delete_node_(id.value());
         } else {
             return false;
         }
-    }
-    if (id.has_value()) {
-            node = get_node(id.value());
     }
 
     if (result) {
@@ -442,7 +445,7 @@ bool DSRGraph::delete_node(uint64_t id)
                         std::cout << "[DELETE NODE] Failed sending del_edge_signal_by_edge" << std::endl;
                     }
             }
-            for (auto &a  : delta_vec) {
+            for (auto &a : delta_vec) {
                 dsrpub_edge.write(&a);
             }            
         }
@@ -635,12 +638,8 @@ requires (std::is_same_v<std::remove_cvref_t<Ed>, DSR::Edge>)
     if (result) {
         if (!copy) {
             emit update_edge_signal(attrs.from(), attrs.to(), attrs.type(), SignalInfo{ agent_id });
-            auto edg = get_edge(attrs.from(), attrs.to(), attrs.type());            
-            if (edg.has_value()) {
-                emit update_edge_signal_by_edge(edg.value(), SignalInfo{ agent_id });
-            } else {
-                std::cout << "[INSERT OR ASSING EDGE] Failed sending update_edge_signal_by_edge" << std::endl;
-            }
+            Edge edg = std::forward<Ed>(attrs);
+            emit update_edge_signal_by_edge(edg, SignalInfo{ agent_id });
 
             if (delta_edge.has_value()) { //Insert
                 dsrpub_edge.write(&delta_edge.value());
@@ -654,11 +653,7 @@ requires (std::is_same_v<std::remove_cvref_t<Ed>, DSR::Edge>)
                                [](auto &&x) { return x.attr_name(); });
 
                 emit update_edge_attr_signal(attrs.from(), attrs.to(), attrs.type(), atts_names, SignalInfo{ agent_id });
-                if (edg.has_value()) {
-                    emit update_edge_attr_signal_by_edge(edg.value(), atts_names, SignalInfo{ agent_id });
-                } else {
-                    std::cout << "[INSERT OR ASSING EDGE] Failed sending update_edge_attr_signal_by_edge" << std::endl;
-                }
+                emit update_edge_attr_signal_by_edge(edg, atts_names, SignalInfo{ agent_id });
             }
         }
     }

@@ -196,7 +196,7 @@ std::optional<uint64_t> DSRGraph::insert_node(No &&node)
                     if (edg.has_value()) {
                         emit update_edge_signal_by_edge(edg.value(), SignalInfo{agent_id});
                     } else {
-                        std::cout << " [INSERT_NODE] Failed sending update_edge_signal_by_edge" << std::endl;
+                        qDebug() << " [INSERT_NODE] Failed sending update_edge_signal_by_edge";
                     }
                 }
             }
@@ -386,22 +386,22 @@ bool DSRGraph::delete_node(const std::string &name)
             if (node.has_value()) {
                 emit del_node_signal_by_node(node.value(), SignalInfo{agent_id});
             } else {
-                std::cout << "[DELETE NODE] Failed sending del_node_signal_by_node" << std::endl;
+                qDebug() << "[DELETE NODE] Failed sending del_node_signal_by_node";
             }
             dsrpub_node.write(&deleted_node.value());
 
             for (auto &[id0, id1, label] : deleted_edges){
-                    emit del_edge_signal(id0, id1, label, SignalInfo{ agent_id });
-                    auto edg = get_edge(id0, id1, label);
-                    if (edg.has_value()) {
-                        emit del_edge_signal_by_edge(edg.value(), SignalInfo{ agent_id });
-                    } else {
-                        std::cout << "[DELETE NODE] Failed sending del_edge_signal_by_edge" << std::endl;
-                    }
+                emit del_edge_signal(id0, id1, label, SignalInfo{ agent_id });
+                auto edg = get_edge(id0, id1, label);
+                if (edg.has_value()) {
+                    emit del_edge_signal_by_edge(edg.value(), SignalInfo{ agent_id });
+                } else {
+                    qDebug() << "[DELETE NODE] Failed sending del_edge_signal_by_edge";
+                }
             }
             for (auto &a : delta_vec) {
                 dsrpub_edge.write(&a);
-            }            
+            }
         }
         return true;
     }
@@ -432,22 +432,22 @@ bool DSRGraph::delete_node(uint64_t id)
             if (node.has_value()) {
                 emit del_node_signal_by_node(node.value(), SignalInfo{ agent_id });
             } else {
-                std::cout << "[DELETE NODE] Failed sending del_node_signal_by_node" << std::endl;
+                qDebug() << "[DELETE NODE] Failed sending del_node_signal_by_node";
             }
             dsrpub_node.write(&deleted_node.value());
 
             for (auto &[id0, id1, label] : deleted_edges) {
-                    emit del_edge_signal(id0, id1, label, SignalInfo{ agent_id });
-                    auto edg = get_edge(id0, id1, label);
-                    if (edg.has_value()) {
-                        emit del_edge_signal_by_edge(edg.value(), SignalInfo{ agent_id });
-                    } else {
-                        std::cout << "[DELETE NODE] Failed sending del_edge_signal_by_edge" << std::endl;
-                    }
+                emit del_edge_signal(id0, id1, label, SignalInfo{ agent_id });
+                auto edg = get_edge(id0, id1, label);
+                if (edg.has_value()) {
+                    emit del_edge_signal_by_edge(edg.value(), SignalInfo{ agent_id });
+                } else {
+                    qDebug() << "[DELETE NODE] Failed sending del_edge_signal_by_edge";
+                }
             }
             for (auto &a : delta_vec) {
                 dsrpub_edge.write(&a);
-            }            
+            }
         }
         return true;
     }
@@ -698,7 +698,7 @@ bool DSRGraph::delete_edge(uint64_t from, uint64_t to, const std::string &key)
             if (edg.has_value()) {
                 emit del_edge_signal_by_edge(edg.value(), SignalInfo{ agent_id });
             } else {
-                std::cout << " [DELETE EDGE] Failed sending del_edge_signal_by_edge" << std::endl;
+                qDebug() << " [DELETE EDGE] Failed sending del_edge_signal_by_edge";
             }
             dsrpub_edge.write(&delta.value());
         }
@@ -739,7 +739,7 @@ bool DSRGraph::delete_edge(const std::string &from, const std::string &to, const
             if (edg.has_value()) {
                 emit del_edge_signal_by_edge(edg.value(), SignalInfo{ agent_id });
             } else {
-                std::cout << "[DELETE EDGE] Failed sending del_edge_signal_by_edge" << std::endl;
+                qDebug() << "[DELETE EDGE] Failed sending del_edge_signal_by_edge";
             }
             dsrpub_edge.write(&delta.value());
         }
@@ -1275,7 +1275,7 @@ void DSRGraph::join_delta_edge(IDL::MvregEdge &&mvreg)
                 for (auto [begin, end] = unprocessed_delta_edge_from.equal_range(from); begin != end; ++begin) { //There should not be many elements in this iteration
                     if (std::get<0>(begin->second) == to && std::get<1>(begin->second) == type){
                         std::get<2>(begin->second).join(std::move(crdt_delta));
-                        std::cout << "JOIN_DELTA_EDGE ID(" << from<< ", "<< to <<", "<< type << ") JOIN UNPROCESSED"  << std::endl;
+                        qDebug() << "JOIN_DELTA_EDGE ID(" << from<< ", "<< to <<", "<< type << ") JOIN UNPROCESSED";
                         find = true; break;
                     }
                 }
@@ -1283,28 +1283,28 @@ void DSRGraph::join_delta_edge(IDL::MvregEdge &&mvreg)
                 for (auto [begin, end] = unprocessed_delta_edge_from.equal_range(to); begin != end; ++begin) { //There should not be many elements in this iteration
                     if (std::get<0>(begin->second) == from && std::get<1>(begin->second) == type){
                         std::get<2>(begin->second).join(std::move(crdt_delta));
-                        std::cout << "JOIN_DELTA_EDGE ID(" << from<< ", "<< to <<", "<< type << ") JOIN UNPROCESSED"  << std::endl;
+                        qDebug() << "JOIN_DELTA_EDGE ID(" << from<< ", "<< to <<", "<< type << ") JOIN UNPROCESSED";
                         find = true; break;
                     }
                 }
 
                 if (!find) {
-                    std::cout << "JOIN_DELTA_EDGE ID(" << from<< ", "<< to <<", "<< type << ") INSERT UNPROCESSED "  ;
+                    qDebug() << "JOIN_DELTA_EDGE ID(" << from<< ", "<< to <<", "<< type << ") INSERT UNPROCESSED ";
                     if (!cfrom) { 
                         std::cout << "No existe from (" << from << ") unprocessed_delta_edge_from" << std::endl; 
                         unprocessed_delta_edge_from.emplace(from, std::tuple{to, type, crdt_delta, timestamp}); 
                     }
                     if (cfrom && !cto) 
                     {
-                        std::cout << "No existe to (" << to << ") unprocessed_delta_edge_to" << std::endl;
+                        qDebug() << "No existe to (" << to << ") unprocessed_delta_edge_to";
                         unprocessed_delta_edge_to.emplace(to, std::tuple{from, type, std::move(crdt_delta), timestamp});
                     }
                 } else {
                     // We should sync the deleted_nodes set too...
-                    std::cout <<"TODO: Unhandled" << std::endl;
+                    qDebug() <<"TODO: Unhandled";
                 }
             } else {
-                std::cout << "ELIMINADO, BORRAR DE UNPROCESSED" << std::endl;
+                qDebug() << "ELIMINADO, BORRAR DE UNPROCESSED";
                 auto node_deleted = [&](uint64_t id){
                     unprocessed_delta_edge_from.erase(id);
                     unprocessed_delta_node_att.erase(id);
@@ -1326,7 +1326,7 @@ void DSRGraph::join_delta_edge(IDL::MvregEdge &&mvreg)
                 if (edg_to_process.has_value()) {
                     emit update_edge_signal_by_edge(edg_to_process.value(), SignalInfo{ mvreg.agent_id() });
                 } else {
-                    std::cout << "[JOIN EDGE] WARNING!!! update_edge_signal_by_edge not emitted to add edge: "<< from << ", " << to << ", " << type << std::endl;
+                    qDebug() << "[JOIN EDGE] WARNING!!! update_edge_signal_by_edge not emitted to add edge: "<< from << ", " << to << ", " << type;
                 }
             } else {
                 //std::cout << "[JOIN EDGE] delete edge: "<< from << ", " << to << ", " << type << std::endl;
@@ -1334,7 +1334,7 @@ void DSRGraph::join_delta_edge(IDL::MvregEdge &&mvreg)
                 if (edg_to_process.has_value()) {
                     emit update_edge_signal_by_edge(edg_to_process.value(), SignalInfo{ mvreg.agent_id() });
                 } else {
-                    std::cout << "[JOIN EDGE] WARNING!!! update_edge_signal_by_edge not emitted to delete edge: "<< from << ", " << to << ", " << type << std::endl;
+                    qDebug() << "[JOIN EDGE] WARNING!!! update_edge_signal_by_edge not emitted to delete edge: "<< from << ", " << to << ", " << type;
                 }
             }
         }
@@ -1784,7 +1784,7 @@ void DSRGraph::edge_attrs_subscription_thread(bool showReceived)
                                     emit update_edge_attr_signal_by_edge(edg.value(), sig, SignalInfo{samples.vec().at(0).agent_id()});
                                     emit update_edge_signal_by_edge(edg.value(), SignalInfo{samples.vec().at(0).agent_id()});
                                 } else {
-                                    std::cout << "[EDGE ATTRS SUBSCRIPTION THREAD] Failed sending _by_edge signals" << std::endl;
+                                    qDebug() << "[EDGE ATTRS SUBSCRIPTION THREAD] Failed sending _by_edge signals";
                                 }
                             });
                         }
@@ -1859,7 +1859,7 @@ void DSRGraph::node_attrs_subscription_thread(bool showReceived)
                                     emit update_node_attr_signal_by_node(node.value(), sig, SignalInfo{samples.vec().at(0).agent_id()});
                                     emit update_node_signal_by_node(node.value(), SignalInfo{samples.vec().at(0).agent_id()});
                                 } else {
-                                    std::cout << "[NODE ATTRS SUBSCRIPTION THREAD] Failed sending _by_node signals" << std::endl;
+                                    qDebug() << "[NODE ATTRS SUBSCRIPTION THREAD] Failed sending _by_node signals";
                                 }
                             });
                         }

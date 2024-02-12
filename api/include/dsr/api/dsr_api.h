@@ -707,6 +707,10 @@ namespace DSR
         void update_edge_attr_signal_by_edge(const Edge &edge, const std::vector<std::string>& att_name, DSR::SignalInfo info = {});
         void del_edge_signal_by_edge(const Edge &edge, DSR::SignalInfo info = {});
         void del_node_signal_by_node(const Node &node, DSR::SignalInfo info = {}) ;
+
+        // New create signals
+        void create_node_signal(uint64_t, const std::string &type, DSR::SignalInfo info = {});
+        void create_node_signal_by_node(const Node &node, DSR::SignalInfo info = {});
     };
 } // namespace CRDT
 

@@ -1124,10 +1124,10 @@ void DSRGraph::join_delta_node(IDL::MvregNode &&mvreg)
         if (joined) {
             if (signal) {
                 emit update_node_signal(id, nodes.at(id).read_reg().type(), SignalInfo{ mvreg.agent_id() });
-                //emit create_node_signal(id, nodes.at(id).read_reg().type(), SignalInfo{ mvreg.agent_id() });
+                emit create_node_signal(id, nodes.at(id).read_reg().type(), SignalInfo{ mvreg.agent_id() });
                 DSR::Node JP_node(nodes.at(id).read_reg());
                 emit update_node_signal_by_node(JP_node, SignalInfo{ mvreg.agent_id() });
-                //emit create_node_signal_by_node(JP_node, SignalInfo{ mvreg.agent_id() });
+                emit create_node_signal_by_node(JP_node, SignalInfo{ mvreg.agent_id() });
                 for (const auto &[k, v] : nodes.at(id).read_reg().fano()) {
                     //std::cout << "[JOIN NODE] add edge FROM: "<< id << ", " << k.first << ", " << k.second << std::endl;
                     emit update_edge_signal(id, k.first, k.second, SignalInfo{ mvreg.agent_id() });
@@ -1588,11 +1588,11 @@ void DSRGraph::join_full_graph(IDL::OrMap &&full_graph)
             //check what change is joined
             if (!nd.has_value() || nd->attrs() != nodes[id].read_reg().attrs()) {
                 emit update_node_signal(id, nodes[id].read_reg().type(), SignalInfo{ agent_id_ch });
-                //emit create_node_signal(id, nodes[id].read_reg().type(), SignalInfo{ agent_id_ch });
+                emit create_node_signal(id, nodes[id].read_reg().type(), SignalInfo{ agent_id_ch });
                 auto node = get_node(id);
                 if (node.has_value()) {
                     emit update_node_signal_by_node(node.value(), SignalInfo{ agent_id_ch });
-                    //emit create_node_signal_by_node(node.value(), SignalInfo{ agent_id_ch });
+                    emit create_node_signal_by_node(node.value(), SignalInfo{ agent_id_ch });
                 } else {
                     std::cout << "[JOIN FULL] WARNING!!! update_edge_signal_by_node not emitted for node: "<< id << std::endl;
                 }

@@ -711,6 +711,9 @@ namespace DSR
         // New create signals
         void create_node_signal(uint64_t, const std::string &type, DSR::SignalInfo info = {});
         void create_node_signal_by_node(const Node &node, DSR::SignalInfo info = {});
+        void create_edge_signal(uint64_t from, uint64_t to, const std::string &type, DSR::SignalInfo info = {});
+        void create_edge_signal_by_edge(const Edge &edge, DSR::SignalInfo info = {});
+
     };
 } // namespace CRDT
 

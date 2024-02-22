@@ -45,7 +45,7 @@ DSRGraph::DSRGraph(std::string name, uint32_t id, const std::string &dsr_input_f
                                                                     if (info.status == eprosima::fastrtps::rtps::ParticipantDiscoveryInfo::DISCOVERED_PARTICIPANT)
                                                                     {
                                                                         std::unique_lock<std::mutex> lck(participant_set_mutex);
-                                                                        qDebug() << "Participant matched [" <<info.info.m_participantName.to_string() << "]";
+                                                                        //qDebug() << "Participant matched [" << QString::fromStdString(info.info.m_participantName.to_string()) << "]";
                                                                         graph->participant_set.insert({info.info.m_participantName.to_string(), false});
                                                                     }
                                                                     else if (info.status == eprosima::fastrtps::rtps::ParticipantDiscoveryInfo::REMOVED_PARTICIPANT ||
@@ -53,7 +53,7 @@ DSRGraph::DSRGraph(std::string name, uint32_t id, const std::string &dsr_input_f
                                                                     {
                                                                         std::unique_lock<std::mutex> lck(participant_set_mutex);
                                                                         graph->participant_set.erase(info.info.m_participantName.to_string());
-                                                                        qDebug() << "Participant unmatched [" <<info.info.m_participantName.to_string() << "]";
+                                                                       // qDebug() << "Participant unmatched [" << QString::fromStdString(info.info.m_participantName.to_string()) << "]";
                                                                         graph->delete_node(info.info.m_participantName.to_string());
                                                                     }
                                                                 }));
@@ -194,9 +194,11 @@ std::optional<uint64_t> DSRGraph::insert_node(No &&node)
                 for (const auto &[k, v]: node.fano())
                 {
                     emit update_edge_signal(node.id(), k.first, k.second,  SignalInfo{agent_id});
+                    emit create_edge_signal(node.id(), k.first, k.second, SignalInfo{agent_id});
                     auto edg = get_edge(node.id(), k.first, k.second);
                     if (edg.has_value()) {
                         emit update_edge_signal_by_edge(edg.value(), SignalInfo{agent_id});
+                        emit create_edge_signal_by_edge(edg.value(), SignalInfo{agent_id});
                     } else {
                         qDebug() << " [INSERT_NODE] Failed sending update_edge_signal_by_edge";
                     }
@@ -1131,6 +1133,7 @@ void DSRGraph::join_delta_node(IDL::MvregNode &&mvreg)
                 for (const auto &[k, v] : nodes.at(id).read_reg().fano()) {
                     //std::cout << "[JOIN NODE] add edge FROM: "<< id << ", " << k.first << ", " << k.second << std::endl;
                     emit update_edge_signal(id, k.first, k.second, SignalInfo{ mvreg.agent_id() });
+                    emit create_edge_signal(id, k.first, k.second, SignalInfo{ mvreg.agent_id() });
                     
                     /* JP: Lo que está comentado, para probar por si empieza a dar la lata saltando el [JOIN NODE] WARNING!!! de abajo */
                     /*
@@ -1144,6 +1147,7 @@ void DSRGraph::join_delta_node(IDL::MvregNode &&mvreg)
                     auto edg = get_edge(id, k.first, k.second);
                     if (edg.has_value()) {
                         emit update_edge_signal_by_edge(edg.value(), SignalInfo{ mvreg.agent_id() });
+                        emit create_edge_signal_by_edge(edg.value(), SignalInfo{ mvreg.agent_id() });
                     } else {
                         std::cout << "[JOIN NODE] WARNING!!! update_edge_signal_by_edge not emitted to add edge FROM: "<< id << ", " << k.first << ", " << k.second << std::endl;
                     }
@@ -1612,9 +1616,11 @@ void DSRGraph::join_full_graph(IDL::OrMap &&full_graph)
                 for (const auto &[k, v] : iter) {
                     if (auto it = nd->fano().find(k); it == nd->fano().end() or it->second != v){
                         emit update_edge_signal(id, k.first, k.second, SignalInfo{ agent_id_ch });
+                        emit create_edge_signal(id, k.first, k.second, SignalInfo{ agent_id_ch });
                             auto edg = get_edge(id, k.first, k.second);
                             if (edg.has_value()) {
                                 emit update_edge_signal_by_edge(edg.value(), SignalInfo{ agent_id_ch });
+                                emit create_edge_signal_by_edge(edg.value(), SignalInfo{ agent_id_ch });
                             } else {
                                 std::cout << "[JOIN FULL] WARNING!!! update_edge_signal_by_edge not emitted to update edge: "<< id << ", " << k.first << ", " << k.second << std::endl;
                             }

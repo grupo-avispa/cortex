@@ -9,8 +9,11 @@ find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 find_package(PythonLibs REQUIRED)
 find_package(Python3)
 find_package(pybind11 CONFIG REQUIRED)
-find_package(fastrtps REQUIRED)
-include_directories(${fastrtps_INCLUDE_DIR})
+
+if(DEFINED $ENV{ROS_DISTRO} AND $ENV{ROS_DISTRO} STREQUAL "humble")
+        find_package(fastrtps 2.6.8 REQUIRED)
+        include_directories(${fastrtps_INCLUDE_DIR})
+endif()
 
 add_library(pydsr MODULE)
 

@@ -8,7 +8,7 @@
 #######################
 branch="${1:-development}"
 set -e
-git clone --branch $branch https://github.com/robocomp/cortex.git
+git clone --branch $branch https://github.com/grupo-avispa/cortex.git
 cd cortex
 yes | bash dependencies.sh
 mkdir -p build

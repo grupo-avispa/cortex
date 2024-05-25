@@ -1,6 +1,6 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 # LABEL about the custom image
-LABEL maintainer="emartinena@unex.es"
+LABEL maintainer="ajtudela@uma.es"
 LABEL version="0.1"
 LABEL description="This is custom Docker Image for Robocomp Cortex"
 RUN echo "Building with branch $Branch"
@@ -22,6 +22,5 @@ RUN apt update && apt install -y \
     git 
 #    && rm -rf /var/lib/apt/lists/*
 WORKDIR /cortex/
-RUN (curl -O https://raw.githubusercontent.com/robocomp/robocomp/development/classes/threadpool/threadpool.h && mkdir -p /usr/include/threadpool && mv threadpool.h /usr/include/threadpool )
 RUN bash -x installation.sh  
 

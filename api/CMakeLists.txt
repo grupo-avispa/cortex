@@ -11,8 +11,11 @@ SET(CMAKE_AUTOUIC ON)
 find_package(Qt5 COMPONENTS Core REQUIRED)
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 find_package(cppitertools)
-find_package(fastrtps REQUIRED)
-find_package(fastcdr REQUIRED)
+
+if(DEFINED $ENV{ROS_DISTRO} AND $ENV{ROS_DISTRO} STREQUAL "humble")
+        find_package(fastrtps 2.6.8 REQUIRED)
+        find_package(fastcdr REQUIRED)
+endif()
 
 if(DEFINED GEOMETRY_API)
     find_package(Qt5 REQUIRED COMPONENTS Widgets Core Gui 3DCore 3DRender 3DExtras 3DInput 3DAnimation)

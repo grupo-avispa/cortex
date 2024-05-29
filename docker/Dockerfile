@@ -12,15 +12,17 @@ COPY . /cortex/
 RUN apt update && apt install -y \
     cmake \
     curl \
-    g++ \
-    gcc \
+    git \
+    libasio-dev \
     libeigen3-dev \
+    libopencv-dev \
     libopenscenegraph-dev \
-    make \
+    libqglviewer-dev-qt5 \
+    libtinyxml2-dev \
+    python3-dev \
+    python3-pybind11 \
     qtbase5-dev \
-    sudo \ 
-    git 
 #    && rm -rf /var/lib/apt/lists/*
 WORKDIR /cortex/
-RUN bash -x installation.sh  
+RUN bash -x installation.sh
 

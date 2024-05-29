@@ -28,27 +28,26 @@ echo "Installing third-party software Fast-RTPS"
 
 mkdir -p ~/software
 cd ~/software
-git clone https://github.com/eProsima/Fast-CDR.git
-mkdir Fast-CDR/build 
+git clone --branch 1.0.x https://github.com/eProsima/Fast-CDR.git
+mkdir Fast-CDR/build
 cd Fast-CDR/build
 export MAKEFLAGS=-j$(($(grep -c ^processor /proc/cpuinfo) - 0))
 cmake ..
-cmake --build . 
-sudo make install 
+cmake --build .
+sudo make install
 cd ~/software
 git clone https://github.com/eProsima/foonathan_memory_vendor.git
 cd foonathan_memory_vendor
-mkdir build 
+mkdir build
 cd build
 cmake ..
-cmake --build . 
-sudo make install 
+cmake --build .
+sudo make install
 cd ~/software
-git clone https://github.com/eProsima/Fast-DDS.git
-mkdir Fast-DDS/build 
+git clone --branch 2.6.8 https://github.com/eProsima/Fast-DDS.git
+mkdir Fast-DDS/build
 cd Fast-DDS/build
-git checkout 2.6.8
 cmake ..
-cmake --build . 
+cmake --build .
 sudo make install
 sudo ldconfig

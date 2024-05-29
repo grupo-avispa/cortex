@@ -1,16 +1,20 @@
 #!/bin/bash 
 # Please make sure that bin/bash is the location of your bash terminal,if not please replace with your local machine's bash path
 branch="${1:-development}"
-sudo apt install -y curl
-sudo apt install qtbase5-dev
-sudo apt-get install -y libopenscenegraph-dev
-sudo apt install libasio-dev
-sudo apt install libtinyxml2-dev 
-sudo apt install libopencv-dev
-sudo apt install libqglviewer-dev-qt5
-sudo apt install libeigen3-dev
-sudo apt install python3-dev python3-pybind11
-sudo apt install cmake gcc-10 g++-10
+echo "Installing dependencies for branch $branch"
+sudo DEBIAN_FRONTEND=noninteractive apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends  \
+    cmake \
+    curl \
+    git \
+    libasio-dev \
+    libeigen3-dev \
+    libopencv-dev \
+    libopenscenegraph-dev \
+    libqglviewer-dev-qt5 \
+    libtinyxml2-dev \
+    python3-dev \
+    python3-pybind11 \
+    qtbase5-dev \
 
 echo "Installing third-party software cppitertools"
 sudo git clone https://github.com/ryanhaining/cppitertools /usr/local/include/cppitertools

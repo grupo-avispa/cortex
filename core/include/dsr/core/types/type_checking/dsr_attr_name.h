@@ -232,6 +232,8 @@ REGISTER_TYPE(plan_target_node_id, int, false)
  * */
 REGISTER_TYPE(current_intention, std::reference_wrapper<const std::string>, false)
 REGISTER_TYPE(grid_as_string, std::reference_wrapper<const std::string>, false)
+REGISTER_TYPE(arrival_time, float, false)
+
 
 /*
  * World
@@ -279,6 +281,7 @@ REGISTER_TYPE(ultrasound_y_pos, std::reference_wrapper<const std::vector<float>>
  * */
 REGISTER_TYPE(delimiting_polygon_x, std::reference_wrapper<const std::vector<float>>, false);
 REGISTER_TYPE(delimiting_polygon_y, std::reference_wrapper<const std::vector<float>>, false);
+
 
 /* * * * * * * * * * *
  * MELEX-RODAO ATTR  *
@@ -401,6 +404,16 @@ REGISTER_TYPE(task_time_stamp, float, false)
 REGISTER_TYPE(task_sensor_tick, float, false)
 
 
+
+/*
+* INTENTION EDGE
+* */
+/* agent_id and valid are already defined */
+REGISTER_TYPE(state, std::string, false) /* State of the intention edge { waiting, in_progress, aborted, failed, completed} */
+REGISTER_TYPE(offset_xyz, std::reference_wrapper<const std::vector<float>>, false)  /* 3-vector Offset for the edge */
+REGISTER_TYPE(orientation, std::reference_wrapper<const std::vector<float>>, false) /* 3-vector Orientation for the offset */
+REGISTER_TYPE(tolerance, std::reference_wrapper<const std::vector<float>>, false)  /* 6-vector Tolerance for the offset and orientation*/
+REGISTER_TYPE(subsystem, std::string, false) /* Subsystem that will execute the intention {base, arm_0, head}*/
 
 
 /* TESTS

@@ -55,5 +55,6 @@ REGISTER_EDGE_TYPE(attention_action)
 REGISTER_EDGE_TYPE(following_action)
 REGISTER_EDGE_TYPE(lost)
 REGISTER_EDGE_TYPE(testtype_e)
+REGISTER_EDGE_TYPE(current)
 
 #endif //DSR_EDGE_TYPE_H

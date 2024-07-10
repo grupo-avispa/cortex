@@ -10,7 +10,7 @@ find_package(PythonLibs REQUIRED)
 find_package(Python3)
 find_package(pybind11 CONFIG REQUIRED)
 
-if(DEFINED $ENV{ROS_DISTRO} AND $ENV{ROS_DISTRO} STREQUAL "humble")
+if($ENV{ROS_DISTRO} STREQUAL "humble")
         find_package(fastrtps 2.6.8 REQUIRED)
         include_directories(${fastrtps_INCLUDE_DIR})
 endif()

@@ -7,10 +7,11 @@ RUN echo "Building with branch $Branch"
 # Disable Prompt During Packages Installation
 ARG DEBIAN_FRONTEND=noninteractive
 
-COPY . /cortex/
 # Update Ubuntu Software repository
 RUN apt update && apt install -y \
+    build-essential \
     cmake \
+    sudo \
     curl \
     git \
     libasio-dev \
@@ -22,7 +23,7 @@ RUN apt update && apt install -y \
     python3-dev \
     python3-pybind11 \
     qtbase5-dev \
-#    && rm -rf /var/lib/apt/lists/*
-WORKDIR /cortex/
-RUN bash -x installation.sh
-
+    && rm -rf /var/lib/apt/lists/*
+RUN curl -o- -L https://raw.githubusercontent.com/grupo-avispa/cortex/development/installation.sh | bash -x
+RUN echo "Built Cortex"
+CMD ["/bin/bash"]

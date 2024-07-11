@@ -3,6 +3,7 @@
 branch="${1:-development}"
 echo "Installing dependencies for branch $branch"
 sudo DEBIAN_FRONTEND=noninteractive apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends  \
+    build-essential \
     cmake \
     curl \
     git \

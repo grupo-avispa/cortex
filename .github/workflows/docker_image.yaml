@@ -28,7 +28,7 @@ jobs:
         with:
           images: grupoavispa/cortex
           tags: |
-            type=ref, suffix=latest, event=branch
+            type=ref, suffix=-latest, event=branch
             type=sha, prefix={{branch}}-
 
       - name: Docker Setup Buildx

@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 # LABEL about the custom image
 LABEL maintainer="ajtudela@uma.es"
 LABEL version="0.1"
-LABEL description="This is custom Docker Image for Robocomp Cortex"
+LABEL description="This is custom Docker image for Cortex"
 RUN echo "Building with branch $Branch"
 # Disable Prompt During Packages Installation
 ARG DEBIAN_FRONTEND=noninteractive

@@ -1,4 +1,5 @@
 [![Build](https://github.com/grupo-avispa/cortex/actions/workflows/build_artifacts.yaml/badge.svg)](https://github.com/grupo-avispa/cortex/actions/workflows/build_artifacts.yaml)
+[![Docker Image](https://github.com/grupo-avispa/cortex/actions/workflows/docker_image.yaml/badge.svg)](https://github.com/grupo-avispa/cortex/actions/workflows/docker_image.yaml)
 
 
 # CORTEX and DSR (Deep State Representation)

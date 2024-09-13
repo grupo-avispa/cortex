@@ -7,10 +7,14 @@
 ## This will install all the cortex dependencies and the library itself. You can read this script and dependencies.sh to better know what is done.
 #######################
 branch="${1:-development}"
+ROS_DISTRO="humble"
 set -e
 git clone --branch $branch https://github.com/grupo-avispa/cortex.git
 cd cortex
 yes | bash dependencies.sh
+if [ -d "/opt/ros/${ROS_DISTRO}" ]; then
+  source /opt/ros/${ROS_DISTRO}/setup.bash
+else
 mkdir -p build
 cd build
 cmake ..

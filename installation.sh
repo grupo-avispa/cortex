@@ -14,7 +14,7 @@ cd cortex
 yes | bash dependencies.sh
 if [ -d "/opt/ros/${ROS_DISTRO}" ]; then
   source /opt/ros/${ROS_DISTRO}/setup.bash
-else
+fi
 mkdir -p build
 cd build
 cmake ..

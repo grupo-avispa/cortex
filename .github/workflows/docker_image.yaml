@@ -80,7 +80,7 @@ jobs:
         with:
           images: grupoavispa/cortex
           tags: |
-            type=ref, suffix=-latest, event=branch
+            type=ref, suffix=-ros-latest, event=branch
             type=sha, prefix={{branch}}-ros-
 
       - name: Docker Setup Buildx

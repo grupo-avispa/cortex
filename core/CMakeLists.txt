@@ -8,7 +8,7 @@ project( dsr_core
 find_package(Qt5 COMPONENTS Core REQUIRED)
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
-if(DEFINED ENV{ROS_DISTRO} AND ENV{ROS_DISTRO} STREQUAL "humble")
+if(DEFINED ENV{ROS_DISTRO})
         find_package(fastrtps 2.6.8 REQUIRED)
         find_package(fastcdr REQUIRED)
 endif()

@@ -64,6 +64,7 @@ RUN curl -o- -L https://raw.githubusercontent.com/grupo-avispa/cortex/developmen
 
 FROM ros:${ros_version} AS ros-version
 COPY --from=ros-base /usr/local /usr/local
+RUN apt update && apt install -y libopenscenegraph-dev
 
 FROM ${dsr_version}-version AS final
 ARG dsr_version

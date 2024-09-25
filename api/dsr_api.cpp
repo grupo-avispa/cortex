@@ -87,7 +87,7 @@ DSRGraph::DSRGraph(std::string name, uint32_t id, const std::string &dsr_input_f
         catch(const DSR::DSRException& e)
         {
             std::cout << e.what() << '\n';
-            qFatal("Aborting program. Cannot continue without intial file");
+            throw DSR::DSRException("Cannot continue without intial file");
         }
         start_fullgraph_server_thread();
         start_subscription_threads(false);
@@ -103,10 +103,10 @@ DSRGraph::DSRGraph(std::string name, uint32_t id, const std::string &dsr_input_f
 
             if (repeated)
             {
-                qFatal("%s", (std::string("There is already an agent connected with the id: ") + std::to_string(agent_id)).c_str());
+                throw DSR::DSRException("There is already an agent connected with the id: " + std::to_string(agent_id));
             }
             else {
-                qFatal("DSRGraph aborting: could not get DSR from the network after timeout");
+                throw DSR::DSRException("DSRGraph aborting: could not get DSR from the network after timeout");
             }
         }
     }

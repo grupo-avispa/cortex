@@ -13,6 +13,7 @@ jobs:
         with:
           packages: |
             build-essential \
+            ca-certificates \
             cmake \
             curl \
             git \
@@ -25,18 +26,33 @@ jobs:
             python3-dev \
             python3-pybind11 \
             qtbase5-dev
-
-      # - name: Restore dependencies cache
-      #   uses: actions/cache@v4
-      #   id: restore-dependencies
-      #   with:
-      #     path: /usr/local
-      #     key: dependencies-${{ runner.os }}-${{ github.sha }}-${{ github.run_id }}
-      #     restore-keys: |
-      #       dependencies-${{ runner.os }}-${{ github.sha }}
-      #       dependencies-${{ runner.os }}
+      - name: Restore dependencies cache
+        uses: actions/cache@v4
+        id: restore-dependencies
+        with:
+          path: |
+            /usr/local/include/cppitertools
+            /usr/local/share/cppitertools
+            /usr/local/include/fastcdr
+            /usr/local/lib/cmake/fastcdr
+            /usr/local/share/fastcdr
+            /usr/local/lib/libfastcdr*
+            /usr/local/include/foonathan_memory
+            /usr/local/lib/foonathan_memory
+            /usr/local/share/foonathan_memory
+            /usr/local/share/foonathan_memory_vendor
+            /usr/local/lib/libfoonathan_memory*
+            /usr/local/include/fastrtps
+            /usr/local/include/fastdds
+            /usr/local/share/fastrtps
+            /usr/local/tools/fastdds
+            /usr/local/lib/libfastrtps*
+          key: dependencies-${{ runner.os }}-${{ github.sha }}-${{ github.run_id }}
+          restore-keys: |
+            dependencies-${{ runner.os }}-${{ github.sha }}
+            dependencies-${{ runner.os }}
       - name: Dependencies
-        #if: steps.restore-dependencies.outputs.cache-hit != 'true'
+        if: steps.restore-dependencies.outputs.cache-hit != 'true'
         run: bash ./dependencies.sh
         shell: bash
       - name: Restore build cache
@@ -48,11 +64,9 @@ jobs:
           restore-keys: |
             build-${{ runner.os }}-${{ github.sha }}
             build-${{ runner.os }}
-      # - name: Build project
-      #   uses: threeal/cmake-action@v2.0.0
-      #   with:
-      #     build-dir: ${{ github.workspace }}/build
-      - name: Build
-        run: |
-          cmake -B ${{github.workspace}}/build
-          cmake --build ${{github.workspace}}/build
+      - name: Build project
+        uses: threeal/cmake-action@v2.0.0
+        with:
+          build-dir: ${{ github.workspace }}/build
+      - name: echo
+        run: ls -la ${{ github.workspace }}/build

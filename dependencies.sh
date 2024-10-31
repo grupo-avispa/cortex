@@ -5,6 +5,7 @@ ROS_DISTRO="humble"
 echo "Installing dependencies for branch $branch"
 sudo DEBIAN_FRONTEND=noninteractive apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends  \
     build-essential \
+    ca-certificates \
     cmake \
     curl \
     git \

@@ -47,6 +47,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Update Ubuntu Software repository
 RUN apt update && apt install --no-install-recommends -y \
     build-essential \
+    ca-certificates \
     cmake \
     sudo \
     curl \

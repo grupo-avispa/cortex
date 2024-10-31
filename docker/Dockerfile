@@ -16,6 +16,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Update Ubuntu Software repository
 RUN apt update && apt install --no-install-recommends -y \
     build-essential \
+    ca-certificates \
     cmake \
     sudo \
     curl \
@@ -34,6 +35,12 @@ RUN curl -o- -L https://raw.githubusercontent.com/grupo-avispa/cortex/developmen
 
 FROM ${base_image} AS base-version
 COPY --from=ubuntu-base /usr/local /usr/local
+RUN apt update && apt install --no-install-recommends -y \
+    ca-certificates \
+    libopenscenegraph-dev \
+    libeigen3-dev \
+    qtbase5-dev \
+    libtinyxml2-dev
 
 FROM ros:${ros_version} AS ros-base
 # LABEL about the custom image
@@ -66,7 +73,12 @@ RUN curl -o- -L https://raw.githubusercontent.com/grupo-avispa/cortex/developmen
 
 FROM ros:${ros_version} AS ros-version
 COPY --from=ros-base /usr/local /usr/local
-RUN apt update && apt install --no-install-recommends -y libopenscenegraph-dev libeigen3-dev qtbase5-dev libtinyxml2-dev
+RUN apt update && apt install --no-install-recommends -y \
+    ca-certificates \
+    libopenscenegraph-dev \
+    libeigen3-dev \
+    qtbase5-dev \
+    libtinyxml2-dev
 
 FROM ${dsr_version}-version AS final
 ARG dsr_version

@@ -1,7 +1,8 @@
 ARG base_image=ubuntu:22.04
 ARG branch="development"
 ARG dsr_version="ros"
-ARG ros_version="humble-ros-core-jammy"
+ARG ros_distro="humble"
+ARG ros_version=$ros_distro"-ros-base-jammy"
 
 FROM ${base_image} AS ubuntu-base
 # LABEL about the custom image
@@ -13,7 +14,7 @@ RUN echo "Building with branch $Branch"
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Update Ubuntu Software repository
-RUN apt update && apt install -y \
+RUN apt update && apt install --no-install-recommends -y \
     build-essential \
     cmake \
     sudo \
@@ -44,7 +45,7 @@ RUN echo "Building with branch $Branch"
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Update Ubuntu Software repository
-RUN apt update && apt install -y \
+RUN apt update && apt install --no-install-recommends -y \
     build-essential \
     cmake \
     sudo \
@@ -64,7 +65,7 @@ RUN curl -o- -L https://raw.githubusercontent.com/grupo-avispa/cortex/developmen
 
 FROM ros:${ros_version} AS ros-version
 COPY --from=ros-base /usr/local /usr/local
-RUN apt update && apt install -y libopenscenegraph-dev
+RUN apt update && apt install --no-install-recommends -y libopenscenegraph-dev libeigen3-dev qtbase5-dev libtinyxml2-dev
 
 FROM ${dsr_version}-version AS final
 ARG dsr_version

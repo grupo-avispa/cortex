@@ -8,16 +8,27 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4.1.6
+    - name: Restore dependencies cache
+      uses: actions/cache@v4
+      id: restore-dependencies
+      with:
+        path: /usr/local
+        key: dependencies-${{ runner.os }}-${{ github.sha }}-${{ github.run_id }}
+        restore-keys: |
+          dependencies-${{ runner.os }}-${{ github.sha }}
+          dependencies-${{ runner.os }}
     - name: Dependencies
+      if: steps.restore-dependencies.outputs.cache-hit != 'true'
       run: bash ./dependencies.sh
       shell: bash
-    - name: Restore cache
+    - name: Restore build cache
       uses: actions/cache@v4
+      id: restore-build
       with:
         path: ${{ github.workspace }}/build
-        key: ${{ runner.os }}-${{ github.sha }}-${{ github.run_id }}
+        key: build-${{ runner.os }}-${{ github.sha }}-${{ github.run_id }}
         restore-keys: |
-          ${{ runner.os }}-${{ github.sha }}
-          ${{ runner.os }}
+          build-${{ runner.os }}-${{ github.sha }}
+          build-${{ runner.os }}
     - name: Build project
       uses: threeal/cmake-action@v2.0.0

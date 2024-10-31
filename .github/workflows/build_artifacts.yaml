@@ -48,9 +48,9 @@ jobs:
           restore-keys: |
             build-${{ runner.os }}-${{ github.sha }}
             build-${{ runner.os }}
+      - name: echo
+        run: ls -la ${{ github.workspace }}/build
       - name: Build project
         uses: threeal/cmake-action@v2.0.0
         with:
           build-dir: ${{ github.workspace }}/build
-      - name: echo
-        run: ls -la

@@ -49,5 +49,7 @@ jobs:
             build-${{ runner.os }}
       - name: Build project
         uses: threeal/cmake-action@v2.0.0
+        with:
+          build-dir: ${{ github.workspace }}/build
       - name: echo
         run: ls -la

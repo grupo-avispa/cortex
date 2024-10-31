@@ -11,5 +11,13 @@ jobs:
     - name: Dependencies
       run: bash ./dependencies.sh
       shell: bash
+    - name: Restore cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ github.workspace }}/build
+        key: ${{ runner.os }}-${{ github.sha }}-${{ github.run_id }}
+        restore-keys: |
+          ${{ runner.os }}-${{ github.sha }}
+          ${{ runner.os }}
     - name: Build project
-      uses: threeal/cmake-action@v1.3.0
+      uses: threeal/cmake-action@v2.0.0

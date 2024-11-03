@@ -38,10 +38,10 @@ target_sources(dsr_core
         include/dsr/core/rtps/dsrsubscriber.h
 
         topics/IDLGraphPubSubTypes.cxx
-        topics/IDLGraph.cxx
+        #topics/IDLGraph.cxx
         topics/IDLGraphCdrAux.ipp
-        include/dsr/core/topics/IDLGraph.h
-        include/dsr/core/topics/IDLGraphPubSubTypes.h
+        include/dsr/core/topics/IDLGraph.hpp
+        include/dsr/core/topics/IDLGraphPubSubTypes.hpp
         include/dsr/core/topics/IDLGraphCdrAux.hpp
 
         include/dsr/core/crdt/delta_crdt.h
@@ -56,7 +56,7 @@ target_sources(dsr_core
 
 target_link_libraries(dsr_core
         PRIVATE
-        Qt5::Core fastcdr fastrtps osgDB OpenThreads Eigen3::Eigen)
+        Qt5::Core fastcdr fastdds osgDB OpenThreads Eigen3::Eigen)
 
 
 target_include_directories(dsr_core

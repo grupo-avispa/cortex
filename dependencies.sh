@@ -32,20 +32,41 @@ if [ -d "/opt/ros/${ROS_DISTRO}" ]; then
 else
   mkdir -p ~/software
   cd ~/software
-  git clone --branch 1.0.x https://github.com/eProsima/Fast-CDR.git
-  cd Fast-CDR
-  mkdir -p build && cd build
   export MAKEFLAGS=-j$(($(grep -c ^processor /proc/cpuinfo) - 0))
-  cmake .. && cmake --build . && sudo make install
+
+  # Fast-RTPS
+  if ! ldconfig -p | grep -q "libfastcdr"; then
+    git clone --branch 1.0.x https://github.com/eProsima/Fast-CDR.git
+    cd Fast-CDR
+    mkdir -p build && cd build
+    cmake .. && cmake --build . && sudo make install
+  else
+    echo -e "Fast-CDR is already installed. Skipping installation."
+  fi
+
+  # foonathan_memory_vendor
   cd ~/software
-  git clone https://github.com/eProsima/foonathan_memory_vendor.git
-  cd foonathan_memory_vendor
-  mkdir -p build && cd build
-  cmake .. && cmake --build . && sudo make install
+  if ! ldconfig -p | grep -q "libfoonathan_memory"; then
+    git clone https://github.com/eProsima/foonathan_memory_vendor.git
+    cd foonathan_memory_vendor
+    mkdir -p build && cd build
+    cmake .. && cmake --build . && sudo make install
+  else
+    echo -e "foonathan_memory is already installed. Skipping installation."
+  fi
+
+  # Fast-DDS
   cd ~/software
-  git clone --branch 2.6.8 https://github.com/eProsima/Fast-DDS.git
-  cd Fast-DDS
-  mkdir -p build && cd build
-  cmake .. && cmake --build . && sudo make install
+  if ! ldconfig -p | grep -q "libfastrtps"; then
+    git clone --branch 2.6.8 https://github.com/eProsima/Fast-DDS.git
+    cd Fast-DDS
+    mkdir -p build && cd build
+    cmake .. && cmake --build . && sudo make install
+  else
+    echo -e "Fast-DDS is already installed. Skipping installation."
+  fi
   sudo ldconfig
 fi
+
+echo "Dependencies installed successfully"
+sudo rm -Rf ~/software

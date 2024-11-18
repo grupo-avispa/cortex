@@ -11,6 +11,8 @@ SET(CMAKE_AUTOUIC ON)
 find_package(Qt5 COMPONENTS Core REQUIRED)
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 find_package(cppitertools)
+find_package(fastdds)
+
 
 if(DEFINED ENV{ROS_DISTRO})
         find_package(fastrtps 2.6.8 REQUIRED)
@@ -61,8 +63,10 @@ target_sources(dsr_api
 
 target_link_libraries(dsr_api
         PRIVATE
-        fastcdr fastdds
-        osgDB OpenThreads
+        fastcdr
+        fastdds
+        osgDB
+        OpenThreads
         Qt5::Core
         PUBLIC
         Eigen3::Eigen

@@ -419,6 +419,9 @@ REGISTER_TYPE(dock_id, std::string, false)
 REGISTER_TYPE(zone, std::string, false)
 REGISTER_TYPE(zones, std::string, false)
 
+// Battery
+REGISTER_TYPE(battery_percentage, float, false)
+
 // Play / Say / Listen
 REGISTER_TYPE(text, std::string, false)
 REGISTER_TYPE(sound, std::string, false)

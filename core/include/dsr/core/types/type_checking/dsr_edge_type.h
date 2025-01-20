@@ -56,4 +56,23 @@ REGISTER_EDGE_TYPE(following_action)
 REGISTER_EDGE_TYPE(lost)
 REGISTER_EDGE_TYPE(testtype_e)
 
+// Action status
+REGISTER_EDGE_TYPE(is)
+REGISTER_EDGE_TYPE(is_performing)
+REGISTER_EDGE_TYPE(is_with)
+REGISTER_EDGE_TYPE(aborting)
+REGISTER_EDGE_TYPE(navigating)
+REGISTER_EDGE_TYPE(measuring)
+
+// Actions starters
+REGISTER_EDGE_TYPE(wants_to)
+REGISTER_EDGE_TYPE(abort)
+REGISTER_EDGE_TYPE(cancel)
+
+// Action finishers
+REGISTER_EDGE_TYPE(stopped)
+REGISTER_EDGE_TYPE(finished)
+REGISTER_EDGE_TYPE(canceled)
+REGISTER_EDGE_TYPE(failed)
+
 #endif //DSR_EDGE_TYPE_H

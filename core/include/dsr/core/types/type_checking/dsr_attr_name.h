@@ -400,8 +400,100 @@ REGISTER_TYPE(task_destination_values, std::reference_wrapper<const std::vector<
 REGISTER_TYPE(task_time_stamp, float, false)
 REGISTER_TYPE(task_sensor_tick, float, false)
 
+// General
+REGISTER_TYPE(priority, int, false)
+REGISTER_TYPE(result_code, std::string, false)
+REGISTER_TYPE(number, int, false)
+REGISTER_TYPE(source, std::string, false)
+REGISTER_TYPE(initstamp, int, false)
+REGISTER_TYPE(timestamp, int, false)
 
+// Navigation
+REGISTER_TYPE(pose_x, float, false)
+REGISTER_TYPE(pose_y, float, false)
+REGISTER_TYPE(pose_angle, float, false)
+REGISTER_TYPE(goal_x, float, false)
+REGISTER_TYPE(goal_y, float, false)
+REGISTER_TYPE(goal_angle, float, false)
+REGISTER_TYPE(dock_id, std::string, false)
+REGISTER_TYPE(zone, std::string, false)
+REGISTER_TYPE(zones, std::string, false)
 
+// Play / Say / Listen
+REGISTER_TYPE(text, std::string, false)
+REGISTER_TYPE(sound, std::string, false)
+REGISTER_TYPE(volume, float, false)
+
+// Rasa
+REGISTER_TYPE(port, int, false)
+REGISTER_TYPE(intent, std::string, false)
+REGISTER_TYPE(entity, std::string, false)
+
+// Explanation
+REGISTER_TYPE(question, std::string, false)
+REGISTER_TYPE(role, std::string, false)
+REGISTER_TYPE(first_answer, std::string, false)
+REGISTER_TYPE(answer, std::string, false)
+
+// Show
+REGISTER_TYPE(interface, std::string, false)
+
+// Use case: do_nothing, wandering, charging, menu, music, neuron_up, getme, reminder, announcer
+REGISTER_TYPE(use_case_id, std::string, false)
+REGISTER_TYPE(menu_choices, std::string, false)
+REGISTER_TYPE(menu_choices1, std::string, false)
+REGISTER_TYPE(menu_choices2, std::string, false)
+REGISTER_TYPE(menu_choices3, std::string, false)
+REGISTER_TYPE(menu_choices4, std::string, false)
+REGISTER_TYPE(menu_choices5, std::string, false)
+REGISTER_TYPE(menu_choices6, std::string, false)
+REGISTER_TYPE(menu_choices7, std::string, false)
+
+// Person
+REGISTER_TYPE(identifier, std::string, false)
+REGISTER_TYPE(safe_distance, float, false)
+REGISTER_TYPE(comm_parameters, std::string, false)
+REGISTER_TYPE(skills_parameters, std::string, false)
+REGISTER_TYPE(menu, std::string, false)
+REGISTER_TYPE(menu1, std::string, false)
+REGISTER_TYPE(menu2, std::string, false)
+REGISTER_TYPE(menu3, std::string, false)
+REGISTER_TYPE(menu4, std::string, false)
+REGISTER_TYPE(menu5, std::string, false)
+REGISTER_TYPE(menu6, std::string, false)
+REGISTER_TYPE(menu7, std::string, false)
+REGISTER_TYPE(reminder, bool, false)
+REGISTER_TYPE(activities, std::string, false)
+REGISTER_TYPE(tracking_enable, bool, false)
+REGISTER_TYPE(neuron, bool, false)
+REGISTER_TYPE(accuracy, float, false)
+REGISTER_TYPE(posture, std::string, false)
+REGISTER_TYPE(word, std::string, false)
+REGISTER_TYPE(necessity, std::string, false)
+REGISTER_TYPE(heartrate, float, false)
+REGISTER_TYPE(breathrate, float, false)
+REGISTER_TYPE(track_id, std::string, false)
+
+// BBDD
+REGISTER_TYPE(bbdd_agent, std::string, false)
+REGISTER_TYPE(changes, std::string, false)
+
+// Smart Home
+REGISTER_TYPE(room, std::string, false)
+REGISTER_TYPE(alarm, std::string, false)
+
+// Sensor
+REGISTER_TYPE(temperature, float, false)
+REGISTER_TYPE(pressure, float, false)
+REGISTER_TYPE(humidity, float, false)
+REGISTER_TYPE(gas, float, false)
+REGISTER_TYPE(distance, float, false)
+REGISTER_TYPE(distance_time, int, false)
+REGISTER_TYPE(vitals_time, int, false)
+REGISTER_TYPE(pose_xmin, float, false)
+REGISTER_TYPE(pose_xmax, float, false)
+REGISTER_TYPE(pose_ymin, float, false)
+REGISTER_TYPE(pose_ymax, float, false)
 
 /* TESTS
  * */

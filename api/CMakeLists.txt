@@ -13,7 +13,7 @@ find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 find_package(cppitertools)
 
 if(DEFINED ENV{ROS_DISTRO})
-        find_package(fastrtps 2.6.8 REQUIRED)
+        find_package(fastrtps 2.14.4 REQUIRED)
         find_package(fastcdr REQUIRED)
 endif()
 

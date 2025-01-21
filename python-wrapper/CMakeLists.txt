@@ -11,8 +11,10 @@ find_package(Python3)
 find_package(pybind11 CONFIG REQUIRED)
 
 if(DEFINED ENV{ROS_DISTRO})
-        find_package(fastrtps 2.6.8 REQUIRED)
+        find_package(fastrtps 2.14.4 REQUIRED)
+        find_package(fastcdr REQUIRED)
         include_directories(${fastrtps_INCLUDE_DIR})
+        include_directories(${fastcdr_INCLUDE_DIR})
 endif()
 
 add_library(pydsr MODULE)

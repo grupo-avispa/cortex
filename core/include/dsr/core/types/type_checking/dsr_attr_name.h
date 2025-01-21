@@ -93,6 +93,12 @@ REGISTER_TYPE(scaley, int, false)
 REGISTER_TYPE(scalez, int, false)
 REGISTER_TYPE(path, std::reference_wrapper<const std::string>, false)
 REGISTER_TYPE(name, std::reference_wrapper<const std::string>, false)
+REGISTER_TYPE(active, bool, false)
+
+/*
+* Edge creation timestamp
+*/
+REGISTER_TYPE(creation_timestamp, float, true)
 
 /*
  * RT
@@ -103,6 +109,7 @@ REGISTER_TYPE(rt_quaternion, std::reference_wrapper<const std::vector<float>>, t
 REGISTER_TYPE(rt_translation_velocity, std::reference_wrapper<const std::vector<float>>, true)
 REGISTER_TYPE(rt_rotation_euler_xyz_velocity, std::reference_wrapper<const std::vector<float>>, true)
 REGISTER_TYPE(rt_timestamps, std::reference_wrapper<const std::vector<uint64_t>> , false)
+REGISTER_TYPE(rt_se2_covariance, std::reference_wrapper<const std::vector<float>>, true)
 REGISTER_TYPE(rt_head_index, int, false)
 
 
@@ -135,6 +142,7 @@ REGISTER_TYPE(person_name, std::reference_wrapper<const std::string>, false)
 REGISTER_TYPE(person_role, std::reference_wrapper<const std::string>, false)
 REGISTER_TYPE(person_age, int, false)
 REGISTER_TYPE(person_velocity, std::vector<float>, false)
+REGISTER_TYPE(velocity_module, float, false)
 REGISTER_TYPE(is_followed, bool, false)
 REGISTER_TYPE(is_lost, bool, false)
 REGISTER_TYPE(person_image, std::reference_wrapper<const std::vector<uint8_t>>, true)
@@ -166,7 +174,10 @@ REGISTER_TYPE(obj_interaction_shape, std::reference_wrapper<const std::string>, 
 REGISTER_TYPE(obj_visible, int, false)
 REGISTER_TYPE(projected_bounding_box, std::reference_wrapper<const std::vector<float>>, true)
 REGISTER_TYPE(unseen_time, int, false)
+REGISTER_TYPE(obj_checked, bool, false)
 REGISTER_TYPE(average_size, std::reference_wrapper<const std::string>, false)
+REGISTER_TYPE(is_an_obstacle, bool, false)
+REGISTER_TYPE(room_id, uint64_t, false)
 /*
  * Object affordances
  * 
@@ -204,9 +215,9 @@ REGISTER_TYPE(cam_depth_width, int, false)
 REGISTER_TYPE(viriato_head_pan_tilt_nose_pos_ref, std::reference_wrapper<const std::vector<float>>, true)
 REGISTER_TYPE(viriato_head_pan_tilt_nose_speed_ref, std::reference_wrapper<const std::vector<float>>, true)
 
-//REGISTER_TYPE(robot_current_advance_speed, std::reference_wrapper<const std::vector<float>>, true)
-//REGISTER_TYPE(robot_current_angular_speed, std::reference_wrapper<const std::vector<float>>, true)
-//REGISTER_TYPE(robot_current_side_speed, std::reference_wrapper<const std::vector<float>>, true)
+REGISTER_TYPE(robot_current_advance_speed, float, true)
+REGISTER_TYPE(robot_current_angular_speed, float, true)
+REGISTER_TYPE(robot_current_side_speed, float, true)
 REGISTER_TYPE(robot_local_linear_velocity, std::reference_wrapper<const std::vector<float>>, true)
 REGISTER_TYPE(robot_local_angular_velocity, std::reference_wrapper<const std::vector<float>>, true)
 REGISTER_TYPE(robot_ref_adv_speed, float, true)
@@ -232,7 +243,7 @@ REGISTER_TYPE(plan_target_node_id, int, false)
  * */
 REGISTER_TYPE(current_intention, std::reference_wrapper<const std::string>, false)
 REGISTER_TYPE(grid_as_string, std::reference_wrapper<const std::string>, false)
-
+REGISTER_TYPE(arrival_time, float, false)
 /*
  * World
  * */
@@ -279,6 +290,15 @@ REGISTER_TYPE(ultrasound_y_pos, std::reference_wrapper<const std::vector<float>>
  * */
 REGISTER_TYPE(delimiting_polygon_x, std::reference_wrapper<const std::vector<float>>, false);
 REGISTER_TYPE(delimiting_polygon_y, std::reference_wrapper<const std::vector<float>>, false);
+REGISTER_TYPE(room_is_oriented, bool, false);
+REGISTER_TYPE(rotation, float, false);
+REGISTER_TYPE(center_x, float, false);
+REGISTER_TYPE(center_y, float, false);
+REGISTER_TYPE(corner1, std::reference_wrapper<const std::vector<float>>, false);
+REGISTER_TYPE(corner2, std::reference_wrapper<const std::vector<float>>, false);
+REGISTER_TYPE(corner3, std::reference_wrapper<const std::vector<float>>, false);
+REGISTER_TYPE(corner4, std::reference_wrapper<const std::vector<float>>, false);
+
 
 /* * * * * * * * * * *
  * MELEX-RODAO ATTR  *
@@ -399,6 +419,29 @@ REGISTER_TYPE(task_pickup_values, std::reference_wrapper<const std::vector<float
 REGISTER_TYPE(task_destination_values, std::reference_wrapper<const std::vector<float>>, false)
 REGISTER_TYPE(task_time_stamp, float, false)
 REGISTER_TYPE(task_sensor_tick, float, false)
+
+/*
+* ROOM
+* */
+REGISTER_TYPE(corner_id, int, false)
+REGISTER_TYPE(valid, bool, false)
+
+/*
+* DOOR
+* */
+REGISTER_TYPE(other_side_door_name, std::reference_wrapper<const std::string>, false)
+REGISTER_TYPE(connected_room_name, std::reference_wrapper<const std::string>, false)
+
+/*
+* INTENTION EDGE
+* */
+/* agent_id and valid are already defined */
+REGISTER_TYPE(state, std::string, false) /* State of the intention edge { waiting, in_progress, aborted, failed, completed} */
+REGISTER_TYPE(offset_xyz, std::reference_wrapper<const std::vector<float>>, false)  /* 3-vector Offset for the edge */
+REGISTER_TYPE(orientation, std::reference_wrapper<const std::vector<float>>, false) /* 3-vector Orientation for the offset */
+REGISTER_TYPE(tolerance, std::reference_wrapper<const std::vector<float>>, false)  /* 6-vector Tolerance for the offset and orientation*/
+REGISTER_TYPE(subsystem, std::string, false) /* Subsystem that will execute the intention {base, arm_0, head}*/
+REGISTER_TYPE(bt_state, std::string, false) /* Subsystem that will execute the intention {base, arm_0, head}*/
 
 // General
 REGISTER_TYPE(priority, int, false)

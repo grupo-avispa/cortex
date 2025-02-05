@@ -9,9 +9,9 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.6
+        uses: actions/checkout@v4.2.2
       - name: Cache APT Packages
-        uses: awalsh128/cache-apt-pkgs-action@v1.4.2
+        uses: awalsh128/cache-apt-pkgs-action@v1.4.3
         with:
           packages: |
             build-essential \
@@ -32,7 +32,7 @@ jobs:
         run: bash ./dependencies.sh
         shell: bash
       - name: Restore build cache
-        uses: actions/cache@v4
+        uses: actions/cache@v4.2.0
         id: restore-build
         with:
           path: ${{ github.workspace }}/build
@@ -41,6 +41,6 @@ jobs:
             build-${{ runner.os }}-${{ github.sha }}
             build-${{ runner.os }}
       - name: Build project
-        uses: threeal/cmake-action@v2.0.0
+        uses: threeal/cmake-action@v2.1.0
         with:
           build-dir: ${{ github.workspace }}/build

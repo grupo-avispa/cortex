@@ -1,6 +1,6 @@
 ARG base_image=ubuntu:24.04
 ARG branch="development"
-ARG dsr_version="ros"
+ARG dsr_version="base"
 ARG ros_distro="jazzy"
 ARG ros_version=$ros_distro"-ros-base-noble"
 
@@ -38,7 +38,7 @@ WORKDIR /usr/local/include/cppitertools
 RUN mkdir -p build && cd build && cmake .. && make install
 RUN mkdir -p /software
 WORKDIR /software
-RUN git clone --branch 1.0.x https://github.com/eProsima/Fast-CDR.git
+RUN git clone --branch 2.2.5 https://github.com/eProsima/Fast-CDR.git
 WORKDIR /software/Fast-CDR
 RUN mkdir -p build && cd build && cmake .. && make install
 WORKDIR /software
@@ -46,7 +46,7 @@ RUN git clone https://github.com/eProsima/foonathan_memory_vendor.git
 WORKDIR /software/foonathan_memory_vendor
 RUN mkdir -p build && cd build && cmake .. && make install
 WORKDIR /software
-RUN git clone --single-branch --branch 2.6.8 --depth 1 https://github.com/eProsima/Fast-DDS.git
+RUN git clone --single-branch --branch 2.14.4 --depth 1 https://github.com/eProsima/Fast-DDS.git
 WORKDIR /software/Fast-DDS
 RUN mkdir -p build && cd build && cmake .. && make install
 RUN ldconfig

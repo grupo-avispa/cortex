@@ -36,7 +36,7 @@ else
 
   # Fast-RTPS
   if ! ldconfig -p | grep -q "libfastcdr"; then
-    git clone --branch 1.0.x https://github.com/eProsima/Fast-CDR.git
+    git clone --branch 2.2.5 https://github.com/eProsima/Fast-CDR.git
     cd Fast-CDR
     mkdir -p build && cd build
     cmake .. && cmake --build . && sudo make install
@@ -58,7 +58,7 @@ else
   # Fast-DDS
   cd ~/software
   if ! ldconfig -p | grep -q "libfastrtps"; then
-    git clone --branch 2.6.8 https://github.com/eProsima/Fast-DDS.git
+    git clone --branch 2.14.4 https://github.com/eProsima/Fast-DDS.git
     cd Fast-DDS
     mkdir -p build && cd build
     cmake .. && cmake --build . && sudo make install

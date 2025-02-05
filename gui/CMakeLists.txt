@@ -39,7 +39,7 @@ find_package(OpenSceneGraph REQUIRED COMPONENTS osg osgDB osgGA)
 find_package(cppitertools)
 
 if(DEFINED ENV{ROS_DISTRO})
-        find_package(fastrtps 2.6.8 REQUIRED)
+        find_package(fastrtps 2.14.4 REQUIRED)
         find_package(fastcdr REQUIRED)
 endif()
 

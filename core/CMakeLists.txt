@@ -9,7 +9,7 @@ find_package(Qt5 COMPONENTS Core REQUIRED)
 find_package(Eigen3 3.3 REQUIRED NO_MODULE)
 
 if(DEFINED ENV{ROS_DISTRO})
-        find_package(fastrtps 2.6.8 REQUIRED)
+        find_package(fastrtps 2.14.4 REQUIRED)
         find_package(fastcdr REQUIRED)
 endif()
 
@@ -39,8 +39,10 @@ target_sources(dsr_core
 
         topics/IDLGraphPubSubTypes.cxx
         topics/IDLGraph.cxx
+        topics/IDLGraphCdrAux.ipp
         include/dsr/core/topics/IDLGraph.h
         include/dsr/core/topics/IDLGraphPubSubTypes.h
+        include/dsr/core/topics/IDLGraphCdrAux.hpp
 
         include/dsr/core/crdt/delta_crdt.h
 

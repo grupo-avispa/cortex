@@ -1,8 +1,8 @@
-ARG base_image=ubuntu:22.04
+ARG base_image=ubuntu:24.04
 ARG branch="development"
 ARG dsr_version="ros"
-ARG ros_distro="humble"
-ARG ros_version=$ros_distro"-ros-base-jammy"
+ARG ros_distro="jazzy"
+ARG ros_version=$ros_distro"-ros-base-noble"
 
 FROM ${base_image} AS ubuntu-base
 ARG branch

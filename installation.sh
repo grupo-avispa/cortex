@@ -7,7 +7,7 @@
 ## This will install all the cortex dependencies and the library itself. You can read this script and dependencies.sh to better know what is done.
 #######################
 branch="${1:-development}"
-ROS_DISTRO="humble"
+ROS_DISTRO="jazzy"
 set -e
 git clone --branch $branch https://github.com/grupo-avispa/cortex.git
 cd cortex

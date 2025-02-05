@@ -1,7 +1,7 @@
 #!/bin/bash 
 # Please make sure that bin/bash is the location of your bash terminal,if not please replace with your local machine's bash path
 branch="${1:-development}"
-ROS_DISTRO="humble"
+ROS_DISTRO="jazzy"
 echo "Installing dependencies for branch $branch"
 sudo DEBIAN_FRONTEND=noninteractive apt-get update && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends  \
     build-essential \

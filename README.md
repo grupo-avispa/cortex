@@ -73,7 +73,7 @@ Conceptually, the DSR represents a network of entities and relations among them.
 
 ## Dependencies
 
-__IMPORTANT__: DSR is only supported in Ubuntu 20.04 and 22.04. We can't help with the issues of other distros or versions.  
+__IMPORTANT__: DSR is only supported in Ubuntu 20.04, 22.04 and 24.04. We can't help with the issues of other distros or versions.  
 
 To be able to use the DSR/CORTEX infraestructure you need to follow the next steps:
 

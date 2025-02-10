@@ -52,7 +52,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build against dsr-builder
-        uses: docker/build-push-action@v5.3.0
+        uses: docker/build-push-action@v6
         with:
           builder: ${{ steps.dsr-builder.outputs.name }}
           context: docker

@@ -148,6 +148,7 @@ REGISTER_NODE_TYPE(listen)
 REGISTER_NODE_TYPE(generate_response)
 REGISTER_NODE_TYPE(get_intent)
 REGISTER_NODE_TYPE(get_role)
+REGISTER_NODE_TYPE(get_task)
 REGISTER_NODE_TYPE(explanation)
 
 // Smart Home

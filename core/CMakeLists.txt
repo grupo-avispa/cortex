@@ -74,8 +74,8 @@ set_target_properties(dsr_core PROPERTIES
         CXX_STANDARD_REQUIRED ON
         CXX_EXTENSIONS ON)
 
-target_compile_options(dsr_core PUBLIC -O3 -fmax-errors=5 -std=c++20 -fno-char8_t
-	)
+
+target_compile_options(dsr_core PUBLIC -O3 -g -fmax-errors=5 -std=c++23)
 
 target_compile_definitions(${PROJECT_NAME} PUBLIC
         QT_NO_DEBUG_OUTPUT

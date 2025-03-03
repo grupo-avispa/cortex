@@ -700,6 +700,7 @@ namespace DSR
 
         void del_edge_signal(uint64_t from, uint64_t to, const std::string &edge_tag, DSR::SignalInfo info = {});
         void deleted_edge_signal(const DSR::Edge & edge, DSR::SignalInfo info = {});
+
         void del_node_signal(uint64_t id, DSR::SignalInfo info = {}) ;
         void deleted_node_signal(const DSR::Node & edge, DSR::SignalInfo info = {});
 

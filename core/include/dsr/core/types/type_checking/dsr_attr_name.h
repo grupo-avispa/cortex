@@ -530,6 +530,7 @@ REGISTER_TYPE(room, std::string, false)
 REGISTER_TYPE(alarm, std::string, false)
 
 // Sensor
+REGISTER_TYPE(type_of_sensor, std::string, false)
 REGISTER_TYPE(measure_timestamp, uint64_t, false)
 REGISTER_TYPE(pm1, int, false)
 REGISTER_TYPE(pm25, int, false)

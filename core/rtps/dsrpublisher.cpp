@@ -21,7 +21,7 @@ DSRPublisher::~DSRPublisher()
 }
 
 std::tuple<bool, eprosima::fastdds::dds::Publisher*, eprosima::fastdds::dds::DataWriter*>
-        DSRPublisher::init(eprosima::fastdds::dds::DomainParticipant *mp_participant_, eprosima::fastdds::dds::Topic *topic, bool isStreamData )
+        DSRPublisher::init(eprosima::fastdds::dds::DomainParticipant *mp_participant_, eprosima::fastdds::dds::Topic *topic, const std::string& partition, bool isStreamData )
 {
     mp_participant = mp_participant_;
 
@@ -73,11 +73,13 @@ std::tuple<bool, eprosima::fastdds::dds::Publisher*, eprosima::fastdds::dds::Dat
     //Invalidate data after 1 second. If we dont receive it after this time we probably won't get it.
     dataWriterQos.lifespan().duration = 1;
 
+    eprosima::fastdds::dds::PublisherQos pub_qos;
+    pub_qos.partition().push_back(partition.c_str());
 
     int retry = 0;
     while (retry < 5) {
 
-        mp_publisher = mp_participant->create_publisher(eprosima::fastdds::dds::PUBLISHER_QOS_DEFAULT);
+        mp_publisher = mp_participant->create_publisher(pub_qos);
         mp_writer = mp_publisher->create_datawriter(topic, dataWriterQos, &m_listener);
 
         if(mp_publisher != nullptr && mp_writer != nullptr) {

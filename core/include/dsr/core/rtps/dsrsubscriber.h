@@ -20,6 +20,7 @@ public:
                    eprosima::fastdds::dds::Topic *topic,
 				   const std::function<void(eprosima::fastdds::dds::DataReader*)>&  f_,
 				   std::mutex& mtx,
+				   const std::string& partition,
 				   bool isStreamData = false);
 
     eprosima::fastdds::dds::Subscriber *getSubscriber();

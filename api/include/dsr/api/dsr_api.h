@@ -60,9 +60,12 @@ namespace DSR
 
         public:
         size_t size() const;
-        DSRGraph(std::string name, uint32_t id, const std::string& dsr_input_file = std::string(), bool all_same_host = true);
+        DSRGraph(std::string name, uint32_t id, const std::string& dsr_input_file = std::string(), const std::string& partition_name = std::string(), bool all_same_host = true);
+        [[deprecated("root parameter is not used anymore")]] DSRGraph(uint64_t root, std::string name, int id, const std::string& dsr_input_file = std::string(), const std::string& partition_name = std::string(), bool all_same_host = true)
+                                : DSRGraph(name, id, dsr_input_file, partition_name, all_same_host)
+        {}
         [[deprecated("root parameter is not used anymore")]] DSRGraph(uint64_t root, std::string name, int id, const std::string& dsr_input_file = std::string(), bool all_same_host = true)
-                                : DSRGraph(name, id, dsr_input_file, all_same_host)
+                                : DSRGraph(name, id, dsr_input_file, std::string(), all_same_host)
         {}
 
         ~DSRGraph() override;
@@ -664,6 +667,8 @@ namespace DSR
         //TODO: Move this to a class?
         DSRParticipant dsrparticipant;
         std::unordered_map<std::string, bool> participant_set;
+        
+        std::string domain_partition;
 
         mutable std::mutex participant_set_mutex;
 

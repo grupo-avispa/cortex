@@ -25,6 +25,7 @@ std::tuple<bool, eprosima::fastdds::dds::Subscriber*, eprosima::fastdds::dds::Da
                          eprosima::fastdds::dds::Topic *topic,
                         const std::function<void(eprosima::fastdds::dds::DataReader*)>&  f_,
                         std::mutex& mtx,
+                        const std::string& partition,
                         bool isStreamData)
 {
     mp_participant = mp_participant_;
@@ -35,7 +36,7 @@ std::tuple<bool, eprosima::fastdds::dds::Subscriber*, eprosima::fastdds::dds::Da
 
 
     eprosima::fastdds::dds::SubscriberQos Rparam;
-
+    Rparam.partition().push_back(partition.c_str());
 
     eprosima::fastdds::dds::DataReaderQos dataReaderQos;
     dataReaderQos.reliability().kind = eprosima::fastdds::dds::RELIABLE_RELIABILITY_QOS;

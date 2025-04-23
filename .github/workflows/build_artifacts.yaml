@@ -45,6 +45,11 @@ jobs:
         uses: threeal/cmake-action@v2.1.0
         with:
           build-dir: ${{ github.workspace }}/build
+      - name: Clean CMake files
+        run: |
+          echo "Cleaning CMake files from build directory..."
+          find ${{ github.workspace }}/build -type f \( -name '*.o' -o -name '*.a' -o -name '*.so' -o -name 'CMakeFiles' -o -name 'Makefile' -o -name 'cmake_install.cmake' -o -name 'CMakeCache.txt' \) -delete
+        shell: bash
       - name: Create DEB package
         run: |
           PACKAGE_NAME=$(basename ${{ github.repository }})
@@ -59,8 +64,7 @@ jobs:
           echo "Description: Deep State Representation (DSR)" >> ${{ github.workspace }}/package/DEBIAN/control
           echo "Copyright: 2025 Alberto Tudela" >> ${{ github.workspace }}/package/DEBIAN/copyright
           mkdir -p ${{ github.workspace }}/package/usr/local/bin
-          ls ${{ github.workspace }}/build
-          cp ${{ github.workspace }}/build/cortex ${{ github.workspace }}/package/usr/local/bin/
+          cp ${{ github.workspace }}/build ${{ github.workspace }}/package/usr/local/bin/
           dpkg-deb --build ${{ github.workspace }}/package ${{ github.workspace }}/${PACKAGE_NAME}_${PACKAGE_VERSION}.deb
         shell: bash
       - name: Install DEB package

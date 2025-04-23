@@ -59,8 +59,9 @@ jobs:
           echo "Description: Deep State Representation (DSR)" >> ${{ github.workspace }}/package/DEBIAN/control
           echo "Copyright: 2025 Alberto Tudela" >> ${{ github.workspace }}/package/DEBIAN/copyright
           mkdir -p ${{ github.workspace }}/package/usr/local/bin
-          cp ${{ github.workspace }}/build/my_executable ${{ github.workspace }}/package/usr/local/bin/
-          dpkg-deb --build ${{ github.workspace }}/package ${{ github.workspace }}/${REPO_NAME}_${VERSION}.deb
+          ls ${{ github.workspace }}/build
+          cp ${{ github.workspace }}/build/cortex ${{ github.workspace }}/package/usr/local/bin/
+          dpkg-deb --build ${{ github.workspace }}/package ${{ github.workspace }}/${PACKAGE_NAME}_${PACKAGE_VERSION}.deb
         shell: bash
       - name: Install DEB package
         run: |

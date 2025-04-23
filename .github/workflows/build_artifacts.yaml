@@ -66,6 +66,8 @@ jobs:
           mkdir -p ${{ github.workspace }}/package/usr/local/bin
           cp -r ${{ github.workspace }}/build ${{ github.workspace }}/package/usr/local/bin/
           dpkg-deb --build ${{ github.workspace }}/package ${{ github.workspace }}/${PACKAGE_NAME}_${PACKAGE_VERSION}.deb
+          ls ${{ github.workspace }}
+          ls ${{ github.workspace }}/package
         shell: bash
       - name: Install DEB package
         run: |

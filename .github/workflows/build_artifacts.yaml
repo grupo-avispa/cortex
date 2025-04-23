@@ -67,11 +67,10 @@ jobs:
           cp -r ${{ github.workspace }}/build ${{ github.workspace }}/package/usr/local/bin/
           dpkg-deb --build ${{ github.workspace }}/package ${{ github.workspace }}/${PACKAGE_NAME}_${PACKAGE_VERSION}.deb
           ls ${{ github.workspace }}
-          ls ${{ github.workspace }}/package
         shell: bash
       - name: Install DEB package
         run: |
-          sudo dpkg -i ${{ github.workspace }}/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.deb
+          sudo dpkg -i ${{ github.workspace }}/${PACKAGE_NAME}_${PACKAGE_VERSION}.deb
         shell: bash
       - name: Upload DEB package
         uses: actions/upload-artifact@v4

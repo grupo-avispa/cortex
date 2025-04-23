@@ -27,7 +27,8 @@ jobs:
             libtinyxml2-dev \
             python3-dev \
             python3-pybind11 \
-            qtbase5-dev
+            qtbase5-dev \
+            dpkg-dev
       - name: Dependencies
         run: bash ./dependencies.sh
         shell: bash
@@ -44,3 +45,29 @@ jobs:
         uses: threeal/cmake-action@v2.1.0
         with:
           build-dir: ${{ github.workspace }}/build
+      - name: Create DEB package
+        run: |
+          PACKAGE_NAME=$(basename ${{ github.repository }})
+          PACKAGE_VERSION=${{ github.ref_name }}
+          mkdir -p ${{ github.workspace }}/package/DEBIAN
+          echo "Package: $PACKAGE_NAME" > ${{ github.workspace }}/package/DEBIAN/control
+          echo "Version: $PACKAGE_VERSION" >> ${{ github.workspace }}/package/DEBIAN/control
+          echo "Section: base" >> ${{ github.workspace }}/package/DEBIAN/control
+          echo "Priority: optional" >> ${{ github.workspace }}/package/DEBIAN/control
+          echo "Architecture: amd64" >> ${{ github.workspace }}/package/DEBIAN/control
+          echo "Maintainer: Alberto Tudela <ajtudela@gmail.com>" >> ${{ github.workspace }}/package/DEBIAN/control
+          echo "Description: Deep State Representation (DSR)" >> ${{ github.workspace }}/package/DEBIAN/control
+          echo "Copyright: 2025 Alberto Tudela" >> ${{ github.workspace }}/package/DEBIAN/copyright
+          mkdir -p ${{ github.workspace }}/package/usr/local/bin
+          cp ${{ github.workspace }}/build/my_executable ${{ github.workspace }}/package/usr/local/bin/
+          dpkg-deb --build ${{ github.workspace }}/package ${{ github.workspace }}/${REPO_NAME}_${VERSION}.deb
+        shell: bash
+      - name: Install DEB package
+        run: |
+          sudo dpkg -i ${{ github.workspace }}/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.deb
+        shell: bash
+      - name: Upload DEB package
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.deb
+          path: ${{ github.workspace }}/${{ env.PACKAGE_NAME }}_${{ env.PACKAGE_VERSION }}.deb

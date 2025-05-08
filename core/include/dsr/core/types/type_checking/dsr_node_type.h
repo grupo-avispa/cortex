@@ -151,6 +151,7 @@ REGISTER_NODE_TYPE(get_intent)
 REGISTER_NODE_TYPE(get_role)
 REGISTER_NODE_TYPE(get_task)
 REGISTER_NODE_TYPE(explanation)
+REGISTER_NODE_TYPE(think)
 
 // Smart Home
 REGISTER_NODE_TYPE(alarm)

@@ -451,6 +451,7 @@ REGISTER_TYPE(number, int, false)
 REGISTER_TYPE(source, std::string, false)
 REGISTER_TYPE(initstamp, int, false)
 REGISTER_TYPE(timestamp, int, false)
+REGISTER_TYPE(prompt, int, false)
 
 // Navigation
 REGISTER_TYPE(pose_x, float, false)

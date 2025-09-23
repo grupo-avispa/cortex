@@ -1,0 +1,8 @@
+include README.md
+include LICENSE
+include *.md
+include *.txt
+include *.in
+recursive-include include *
+recursive-include test *
+recursive-include etc *

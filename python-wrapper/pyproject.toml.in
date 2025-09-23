@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "pybind11>=2.6.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pydsr"
+version = "@PROJECT_VERSION@"
+description = "@PROJECT_DESCRIPTION@"
+readme = "README.md"
+license = "Apache-2.0"
+authors = [
+    {name = "Robocomp Team", email = "robocomp.team@gmail.com"}
+]
+keywords = ["robotics", "graph", "distributed", "scene-representation"]
+requires-python = ">=3.8"
+
+[project.urls]
+Homepage = "https://github.com/robocomp/robocomp"
+Repository = "https://github.com/robocomp/robocomp"
+Issues = "https://github.com/robocomp/robocomp/issues"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+
+[tool.setuptools.package-data]
+"*" = ["pydsr@PYTHON_MODULE_EXTENSION@"]

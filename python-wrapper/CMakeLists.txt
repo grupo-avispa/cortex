@@ -84,12 +84,12 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/setup.py.in ${CMAKE_CURRENT_BINARY_DI
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/pyproject.toml.in ${CMAKE_CURRENT_BINARY_DIR}/pyproject.toml @ONLY)
 
 # Add custom command to build wheel automatically after building pydsr
-add_custom_command(TARGET pydsr POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:pydsr> ${CMAKE_CURRENT_BINARY_DIR}/
-        COMMAND ${Python3_EXECUTABLE} -m pip wheel . --no-deps --wheel-dir=${CMAKE_CURRENT_BINARY_DIR}/dist
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "Building Python wheel package automatically"
-)
+# add_custom_command(TARGET pydsr POST_BUILD
+# COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:pydsr> ${CMAKE_CURRENT_BINARY_DIR}/
+# COMMAND ${Python3_EXECUTABLE} -m pip wheel . --no-deps --wheel-dir=${CMAKE_CURRENT_BINARY_DIR}/dist
+# WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+# COMMENT "Building Python wheel package automatically"
+# )
 
 # Optional: Create a separate wheel target for manual building
 add_custom_target(wheel_only

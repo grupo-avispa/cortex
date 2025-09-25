@@ -486,6 +486,10 @@ REGISTER_TYPE(answer, std::string, false)
 // Show
 REGISTER_TYPE(interface, std::string, false)
 
+// Lang
+REGISTER_TYPE(query, std::string, false)
+REGISTER_TYPE(response, std::string, false)
+
 // Use case: do_nothing, wandering, charging, menu, music, neuron_up, getme, reminder, announcer
 REGISTER_TYPE(use_case_id, std::string, false)
 REGISTER_TYPE(menu_choices, std::string, false)

@@ -558,6 +558,7 @@ REGISTER_TYPE(pose_xmin, float, false)
 REGISTER_TYPE(pose_xmax, float, false)
 REGISTER_TYPE(pose_ymin, float, false)
 REGISTER_TYPE(pose_ymax, float, false)
+REGISTER_TYPE(presence,bool,false)
 
 /* TESTS
  * */

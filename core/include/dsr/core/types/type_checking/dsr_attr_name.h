@@ -82,6 +82,7 @@ inline std::vector<std::unique_ptr<std::string>> attribute_types::static_duratio
 REGISTER_TYPE(level, int, false)
 REGISTER_TYPE(pos_x, float, false)
 REGISTER_TYPE(pos_y, float, false)
+REGISTER_TYPE(pos_z, float, false)
 REGISTER_TYPE(parent, std::uint64_t, false)
 REGISTER_TYPE(color, std::reference_wrapper<const std::string>, false)
 REGISTER_TYPE(texture, std::reference_wrapper<const std::string>, false)
@@ -95,6 +96,11 @@ REGISTER_TYPE(scalez, int, false)
 REGISTER_TYPE(path, std::reference_wrapper<const std::string>, false)
 REGISTER_TYPE(name, std::reference_wrapper<const std::string>, false)
 REGISTER_TYPE(active, bool, false)
+
+REGISTER_TYPE(identifier, std::string, false)
+REGISTER_TYPE(category, std::string, false)
+REGISTER_TYPE(confidence, float, false)
+REGISTER_TYPE(track_id, std::string, false)
 
 /*
 * Edge creation timestamp
@@ -502,7 +508,6 @@ REGISTER_TYPE(menu_choices6, std::string, false)
 REGISTER_TYPE(menu_choices7, std::string, false)
 
 // Person
-REGISTER_TYPE(identifier, std::string, false)
 REGISTER_TYPE(safe_distance, float, false)
 REGISTER_TYPE(comm_parameters, std::string, false)
 REGISTER_TYPE(skills_parameters, std::string, false)
@@ -524,7 +529,6 @@ REGISTER_TYPE(word, std::string, false)
 REGISTER_TYPE(necessity, std::string, false)
 REGISTER_TYPE(heartrate, float, false)
 REGISTER_TYPE(breathrate, float, false)
-REGISTER_TYPE(track_id, std::string, false)
 
 // BBDD
 REGISTER_TYPE(bbdd_agent, std::string, false)
@@ -535,7 +539,6 @@ REGISTER_TYPE(room, std::string, false)
 REGISTER_TYPE(alarm, std::string, false)
 
 // Sensor
-REGISTER_TYPE(type_of_sensor, std::string, false)
 REGISTER_TYPE(measure_timestamp, uint64_t, false)
 REGISTER_TYPE(pm1, int, false)
 REGISTER_TYPE(pm25, int, false)
